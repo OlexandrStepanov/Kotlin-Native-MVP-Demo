@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-import app
+import common
 
 class SearchViewController : UIViewController, SearchView, UITableViewDelegate, UITableViewDataSource {
     

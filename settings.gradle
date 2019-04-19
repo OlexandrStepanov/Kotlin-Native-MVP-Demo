@@ -25,4 +25,5 @@ enableFeaturePreview('GRADLE_METADATA')
 
 rootProject.name = 'kn-mvp-demo'
 
-include ':app'
+include ':common'
+include ':androidApp'
