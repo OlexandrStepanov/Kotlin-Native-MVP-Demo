@@ -49,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		2C30424C2196CFE5002B4B53 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		4679B376226DBE74006C87D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../common/build/bin/ios/debugFramework/common.framework/Info.plist; sourceTree = "<group>"; };
+		4679B377226DC2C5006C87D7 /* kotlin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kotlin; path = ../../common/src/commonMain/kotlin; sourceTree = "<group>"; };
 		F861D7DD207FA40F0085E80D /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F861D7E0207FA40F0085E80D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F861D7E5207FA40F0085E80D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4679B375226DBE5B006C87D7 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				4679B377226DC2C5006C87D7 /* kotlin */,
+				4679B376226DBE74006C87D7 /* Info.plist */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
 		F861D7D4207FA40F0085E80D = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +112,7 @@
 		F861D7DF207FA40F0085E80D /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				4679B375226DBE5B006C87D7 /* Lib */,
 				F861D7E0207FA40F0085E80D /* AppDelegate.swift */,
 				F861D7E4207FA40F0085E80D /* Main.storyboard */,
 				F861D7E9207FA4100085E80D /* LaunchScreen.storyboard */,
@@ -514,6 +526,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/../common/build/bin/ios/debugFramework/common.framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				KOTLIN_BUILD_TYPE = DEBUG;
 				KOTLIN_TARGET = "";
@@ -545,6 +558,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/../common/build/bin/ios/debugFramework/common.framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				KOTLIN_BUILD_TYPE = RELEASE;
 				KOTLIN_TARGET = "";
