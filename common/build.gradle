@@ -37,10 +37,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
+def cInteropPath = "$projectDir/src/iosMain/c_interop"
+def podsPath = "$projectDir/../iosApp/Pods"
+
 kotlin {
     targets {
         fromPreset(presets.android, 'androidLib')
 
+        def workingDir = buildscript.sourceFile.getParent()
         def buildForDevice = project.findProperty("device")?.toBoolean() ?: false
         def iosPreset = (buildForDevice) ? presets.iosArm64 : presets.iosX64
         fromPreset(iosPreset, 'ios') {
@@ -49,6 +53,22 @@ kotlin {
                     // Disable bitcode embedding for the simulator build.
                     if (!buildForDevice) {
                         embedBitcode("disable")
+                    }
+
+                    linkerOpts "-F${cInteropPath}"
+                    linkerOpts '-rpath', '@executable_path/Frameworks'
+                    linkerOpts "-F${workingDir}"
+                }
+            }
+            compilations.main {
+                outputKinds('framework')
+                cinterops {
+                    firebase {
+                        defFile "${cInteropPath}/firebase.def"
+                        includeDirs {
+                            allHeaders "${podsPath}/FirebaseCore/Firebase/Core/Public",
+                                    "${podsPath}/FirebaseFirestore/Firestore/Source/Public"
+                        }
                     }
                 }
             }
