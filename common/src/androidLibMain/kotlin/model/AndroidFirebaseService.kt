@@ -2,13 +2,15 @@ package com.akqa.kn.lib
 
 import android.util.Log
 
-class FirebaseServiceImpl : AbstractFirebaseService() {
+actual class FirebaseService {
 
-    private val TAG = FirebaseServiceImpl::class.simpleName
+    actual companion object {
+        private val TAG = FirebaseService::class.simpleName
 
-    override fun initialize() {
-        //  On android doesn't require
-        Log.d(TAG, "initialize()")
+        actual fun configure() {
+            //  On android doesn't require
+            Log.d(TAG, "initialize()")
+        }
     }
 
 }

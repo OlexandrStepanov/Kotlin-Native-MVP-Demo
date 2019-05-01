@@ -2,12 +2,12 @@ package com.akqa.kn.lib
 
 import firebase.FIRApp
 
-class FirebaseServiceImpl : AbstractFirebaseService() {
+actual class FirebaseService {
+    actual companion object {
+        actual fun configure() {
+            println("Firebase initialize()")
 
-    override fun initialize() {
-        println("Firebase initialize()")
-
-        FIRApp.configure()
+            FIRApp.configure()
+        }
     }
-
 }

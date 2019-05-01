@@ -1,10 +1,8 @@
 package com.akqa.kn.lib
 
-interface FirebaseService {
-    fun initialize()
-}
-
-abstract class AbstractFirebaseService : FirebaseService {
-
+expect class FirebaseService {
+    companion object{
+        fun configure()
+    }
 }
 

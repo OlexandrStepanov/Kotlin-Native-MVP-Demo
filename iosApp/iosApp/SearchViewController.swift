@@ -11,11 +11,14 @@ class SearchViewController : UIViewController, SearchView, UITableViewDelegate, 
             view: self
     )
     
+    let firebase: FirebaseService.Companion = FirebaseService.Companion.init()
+    
     override func viewDidLoad() {
+        firebase.configure()
+        
         super.viewDidLoad()
         searchResultsTable.delegate = self
         searchResultsTable.dataSource = self
-        print("theWikiRepository: \(theWikiRepository)")
         presenter.start()
     }
     

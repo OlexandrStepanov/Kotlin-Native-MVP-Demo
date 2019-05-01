@@ -33,6 +33,7 @@ xcuserdata/
 ## CocoaPods
 
 Pods/
+Podfile.lock
 
 google-services.json
 GoogleService-Info.plist
