@@ -37,15 +37,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-def cInteropPath = "$projectDir/src/iosMain/cinterop"
-def podsPath = "$projectDir/../iosApp/Pods"
 
 kotlin {
     targets {
         fromPreset(presets.android, 'androidLib')
 
-        def buildType = (project.findProperty("kotlin.build.type") ?: "Debug").toLowerCase().capitalize()
-        def workingDir = buildscript.sourceFile.getParent()
         def buildForDevice = project.findProperty("device")?.toBoolean() ?: false
         def iosPreset = (buildForDevice) ? presets.iosArm64 : presets.iosX64
         fromPreset(iosPreset, 'ios') {
@@ -55,27 +51,7 @@ kotlin {
                     if (!buildForDevice) {
                         embedBitcode("disable")
                     }
-
-                    linkerOpts "-F${cInteropPath}/bin/${buildType}"
-                    linkerOpts '-rpath', '@executable_path/Frameworks', '-ObjC'
-                    linkerOpts "-F${workingDir}"
                 }
-            }
-            compilations.main {
-                outputKinds('framework')
-                cinterops {
-                    firebase {
-                        defFile "${cInteropPath}/firebase.def"
-                        includeDirs {
-                            allHeaders "${podsPath}/FirebaseCore/Firebase/Core/Public"
-//                                    "${podsPath}/FirebaseFirestore/Firestore/Source/Public"
-                        }
-                    }
-                }
-
-                linkerOpts "-F${cInteropPath}/bin/${buildType}"
-                linkerOpts '-rpath', '@executable_path/Frameworks', '-ObjC'
-                linkerOpts "-F${workingDir}"
             }
         }
     }
@@ -105,6 +81,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-json-jvm:${rootProject.ext.ktor_version}"
                 implementation "io.ktor:ktor-client-android:${rootProject.ext.ktor_version}"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${rootProject.ext.serialization_version}"
+                implementation 'com.google.firebase:firebase-firestore:17.1.0'
             }
         }
         androidLibTest {

@@ -10,6 +10,9 @@
 		1D489DB541C32D3D6D083CB3 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E696200003FCBF72E702AECA /* Pods_iosApp.framework */; };
 		2AE26B99C0B1FB8F09ACDF68 /* Pods_iosAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A551AA73994B3AA649CD7A /* Pods_iosAppTests.framework */; };
 		2C30424D2196CFE5002B4B53 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30424C2196CFE5002B4B53 /* SearchViewController.swift */; };
+		A95A95D8228027F500835003 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95A95D7228027F500835003 /* PostsViewController.swift */; };
+		A95A95DA228029FA00835003 /* IosFirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95A95D9228029FA00835003 /* IosFirebaseService.swift */; };
+		A95A95DC22804EA500835003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A95A95DB22804EA500835003 /* Assets.xcassets */; };
 		A9979E812279AE990009FB09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9979E802279AE990009FB09 /* GoogleService-Info.plist */; };
 		F861D7E1207FA40F0085E80D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861D7E0207FA40F0085E80D /* AppDelegate.swift */; };
 		F861D7E6207FA40F0085E80D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F861D7E4207FA40F0085E80D /* Main.storyboard */; };
@@ -54,8 +57,10 @@
 		2C30424C2196CFE5002B4B53 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		578665292602018FBFFDB224 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		678F44176D2A3D747B421F1C /* Pods-iosAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosAppTests.release.xcconfig"; path = "Target Support Files/Pods-iosAppTests/Pods-iosAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		A95A95D7228027F500835003 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		A95A95D9228029FA00835003 /* IosFirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosFirebaseService.swift; sourceTree = "<group>"; };
+		A95A95DB22804EA500835003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9979E802279AE990009FB09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A9979E842279BBD80009FB09 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B4A551AA73994B3AA649CD7A /* Pods_iosAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF8024439DE0486166BA73CA /* Pods-iosAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosAppTests.debug.xcconfig"; path = "Target Support Files/Pods-iosAppTests/Pods-iosAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E696200003FCBF72E702AECA /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,12 +148,15 @@
 		F861D7DF207FA40F0085E80D /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				A95A95D9228029FA00835003 /* IosFirebaseService.swift */,
 				2C30424C2196CFE5002B4B53 /* SearchViewController.swift */,
+				A95A95D7228027F500835003 /* PostsViewController.swift */,
 				F861D7E0207FA40F0085E80D /* AppDelegate.swift */,
 				F861D7E4207FA40F0085E80D /* Main.storyboard */,
 				F861D7E9207FA4100085E80D /* LaunchScreen.storyboard */,
 				F861D7EC207FA4100085E80D /* Info.plist */,
 				A9979E802279AE990009FB09 /* GoogleService-Info.plist */,
+				A95A95DB22804EA500835003 /* Assets.xcassets */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 			files = (
 				F861D7EB207FA4100085E80D /* LaunchScreen.storyboard in Resources */,
 				F861D7E6207FA40F0085E80D /* Main.storyboard in Resources */,
+				A95A95DC22804EA500835003 /* Assets.xcassets in Resources */,
 				A9979E812279AE990009FB09 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,7 +345,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -344,7 +357,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -373,6 +390,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A95A95DA228029FA00835003 /* IosFirebaseService.swift in Sources */,
+				A95A95D8228027F500835003 /* PostsViewController.swift in Sources */,
 				2C30424D2196CFE5002B4B53 /* SearchViewController.swift in Sources */,
 				F861D7E1207FA40F0085E80D /* AppDelegate.swift in Sources */,
 			);
@@ -552,7 +571,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "-v";
 				PRODUCT_BUNDLE_IDENTIFIER = com.akqa.kn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -574,7 +592,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "-v";
 				PRODUCT_BUNDLE_IDENTIFIER = com.akqa.kn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

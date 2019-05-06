@@ -1,15 +1,33 @@
 package com.akqa.kn.lib
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.serialization.ImplicitReflectionSerializer
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.stringify
 
-import android.util.Log
+class AndroidFirebaseDocument(json: String): FirebaseDocument {
+    override val json: String = json
+}
 
-actual class FirebaseService {
+class AndroidFirebaseService: FirebaseService {
+    private val TAG = this.javaClass.simpleName
 
-    actual companion object {
-        private val TAG = FirebaseService::class.simpleName
+    @ImplicitReflectionSerializer
+    override fun loadAllDocuments(collectionRef: String, handler: FirebaseLoadHandler) {
+        val collection = FirebaseFirestore.getInstance().collection(collectionRef)
+        collection.get().addOnSuccessListener { result ->
+            result.documents.mapNotNull { doc ->
+                if (doc.data != null) {
+                    val json = Json.stringify(doc.data as Map<String, Any>)
+                    AndroidFirebaseDocument(json)
+                }
+                else {
+                    Logger.e(TAG, "Error getting Firestore document: $doc")
+                    null
+                }
+            }
 
-        actual fun configure() {
-            //  On android doesn't require
-            Log.d(TAG, "initialize()")
+        }.addOnFailureListener { exception ->
+            Logger.e(TAG, "Error getting Firestore documents: $exception")
         }
     }
 
