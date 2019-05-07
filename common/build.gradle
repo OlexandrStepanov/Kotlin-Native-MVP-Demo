@@ -37,6 +37,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
+
 kotlin {
     targets {
         fromPreset(presets.android, 'androidLib')
@@ -80,6 +81,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-json-jvm:${rootProject.ext.ktor_version}"
                 implementation "io.ktor:ktor-client-android:${rootProject.ext.ktor_version}"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${rootProject.ext.serialization_version}"
+                implementation 'com.google.firebase:firebase-firestore:17.1.0'
             }
         }
         androidLibTest {

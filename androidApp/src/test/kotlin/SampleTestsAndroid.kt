@@ -1,6 +1,6 @@
 package com.akqa.kn.app
 
-import kotlin.test.Test
+import org.junit.Test
 import kotlin.test.assertTrue
 
 class SampleTestsAndroid {

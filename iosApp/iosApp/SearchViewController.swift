@@ -2,7 +2,15 @@ import Foundation
 import UIKit
 import common
 
+class SearchResultCell : UITableViewCell {    
+    @IBOutlet var title: UILabel!
+}
+
+
 class SearchViewController : UIViewController, SearchView, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet var searchResultsTable: UITableView!
+    @IBOutlet var searchQueryTextField: UITextField!
     
     lazy var theWikiRepository = WikiRepositoryImpl()
     lazy var presenter = SearchPresenter(
@@ -15,7 +23,6 @@ class SearchViewController : UIViewController, SearchView, UITableViewDelegate, 
         super.viewDidLoad()
         searchResultsTable.delegate = self
         searchResultsTable.dataSource = self
-        print("theWikiRepository: \(theWikiRepository)")
         presenter.start()
     }
     
@@ -55,13 +62,4 @@ class SearchViewController : UIViewController, SearchView, UITableViewDelegate, 
 
         return cell
     }
-    
-    @IBOutlet var searchResultsTable: UITableView!
-    
-    @IBOutlet var searchQueryTextField: UITextField!
-}
-
-class SearchResultCell : UITableViewCell {
-    
-    @IBOutlet var title: UILabel!
 }

@@ -3,7 +3,17 @@ package com.akqa.kn.lib
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import com.akqa.kn.lib.*
+
+
+
+interface SearchView {
+    class ResultItem(val title: String, val distance: Double, val url: String)
+
+    var results: List<ResultItem>
+    val query: String
+}
+
+
 
 class SearchPresenter(
     private val repository: WikiRepository,

@@ -7,4 +7,4 @@ import kotlin.test.Ignore
 // special class for running test within IDE
 @Ignore
 @RunWith(JUnit4::class)
-class SampleTestJavaHelper : SampleTest()
+class SampleTestJavaHelper : SampleTests()

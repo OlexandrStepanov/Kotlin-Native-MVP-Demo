@@ -8,9 +8,10 @@ buildscript {
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:3.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.2.0'
     }
 }
 
@@ -27,4 +28,5 @@ ext {
     coroutines_version = "1.2.0"
     ktor_version = "1.1.4"
     serialization_version = "0.10.0"
+    firebase_version = "16.0.1"
 }
