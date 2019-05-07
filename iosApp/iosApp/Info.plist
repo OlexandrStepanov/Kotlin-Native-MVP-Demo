@@ -39,6 +39,8 @@
 	<string>Used</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used</string>
+	<key>NFCReaderUsageDescription</key>
+	<string>Used</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

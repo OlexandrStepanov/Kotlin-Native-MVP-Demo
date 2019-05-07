@@ -1,6 +1,7 @@
 package com.akqa.kn.app
 
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -22,6 +23,8 @@ import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.properties.Delegates
+import android.nfc.*
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity(), SearchView {
@@ -79,6 +82,28 @@ class MainActivity : AppCompatActivity(), SearchView {
                                             permissions: Array<String>, grantResults: IntArray) {
 
         permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        if (intent != null) {
+            readFromIntent(intent)
+        }
+    }
+
+    private fun readFromIntent(intent: Intent) {
+        val action = intent.action
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED == action) {
+            val parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+            val context = this
+            with(parcelables) {
+                val inNdefMessage = this[0] as NdefMessage
+                val inNdefRecords = inNdefMessage.records
+                val ndefRecord_0 = inNdefRecords[0]
+
+                val inMessage = String(ndefRecord_0.payload)
+                Toast.makeText(context, inMessage, Toast.LENGTH_LONG).show()
+             }
+        }
     }
 }
 
