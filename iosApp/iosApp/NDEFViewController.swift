@@ -27,6 +27,8 @@ class NDEFViewController: UIViewController, NFCView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataLabel.text = ""
+        
         presenter = NFCPresenter(nfcService: NFCServiceImpl(), view: self)
     }
     

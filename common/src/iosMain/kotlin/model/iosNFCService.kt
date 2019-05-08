@@ -56,7 +56,8 @@ class NFCServiceImpl: AbstractNFCService() {
 
     private val delegate = object : NSObject(), NFCNDEFReaderSessionDelegateProtocol {
         override fun readerSession(session: NFCNDEFReaderSession, didDetectNDEFs: List<*>) {
-            update(((didDetectNDEFs.last() as NFCNDEFMessage).records().last() as NFCNDEFPayload).toNFCTag())
+            val tag = ((didDetectNDEFs.last() as NFCNDEFMessage).records().last() as NFCNDEFPayload).toNFCTag()
+            update(tag)
         }
 
         override fun readerSession(session: NFCNDEFReaderSession, didInvalidateWithError: NSError) {

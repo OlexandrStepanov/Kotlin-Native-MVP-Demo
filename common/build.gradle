@@ -42,7 +42,7 @@ kotlin {
     targets {
         fromPreset(presets.android, 'androidLib')
 
-        def buildForDevice = project.findProperty("device")?.toBoolean() ?: false
+        def buildForDevice = project.findProperty("kotlin.target") == "ios_arm"
         def iosPreset = (buildForDevice) ? presets.iosArm64 : presets.iosX64
         fromPreset(iosPreset, 'ios') {
             binaries {

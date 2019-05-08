@@ -22,10 +22,10 @@ class NFCPresenter(
     }
 
     fun present() {
-
         nfcService.tag?.let {
+            val tag = it.copy()
             GlobalScope.launch(coroutineDispatcher) {
-                view.addTag(it)
+                view.addTag(tag)
             }
         }
     }

@@ -665,8 +665,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				KOTLIN_BUILD_TYPE = DEBUG;
 				KOTLIN_TARGET = "";
-				"KOTLIN_TARGET[sdk=iphoneos*]" = ios;
-				"KOTLIN_TARGET[sdk=iphonesimulator*]" = ios;
+				"KOTLIN_TARGET[sdk=iphoneos*]" = ios_arm;
+				"KOTLIN_TARGET[sdk=iphonesimulator*]" = ios_x64;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -696,8 +696,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				KOTLIN_BUILD_TYPE = RELEASE;
 				KOTLIN_TARGET = "";
-				"KOTLIN_TARGET[sdk=iphoneos*]" = ios;
-				"KOTLIN_TARGET[sdk=iphonesimulator*]" = ios;
+				"KOTLIN_TARGET[sdk=iphoneos*]" = ios_arm;
+				"KOTLIN_TARGET[sdk=iphonesimulator*]" = ios_x64;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
