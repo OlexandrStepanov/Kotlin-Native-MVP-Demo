@@ -15,17 +15,16 @@ class AndroidFirebaseService: FirebaseService {
     override fun loadAllDocuments(collectionRef: String, handler: FirebaseLoadHandler) {
         val collection = FirebaseFirestore.getInstance().collection(collectionRef)
         collection.get().addOnSuccessListener { result ->
-            result.documents.mapNotNull { doc ->
+            handler(result.documents.mapNotNull { doc ->
                 if (doc.data != null) {
-                    val json = Json.stringify(doc.data as Map<String, Any>)
+                    val json = Json.stringify(doc.data as Map<String, String>)
                     AndroidFirebaseDocument(json)
                 }
                 else {
                     Logger.e(TAG, "Error getting Firestore document: $doc")
                     null
                 }
-            }
-
+            })
         }.addOnFailureListener { exception ->
             Logger.e(TAG, "Error getting Firestore documents: $exception")
         }

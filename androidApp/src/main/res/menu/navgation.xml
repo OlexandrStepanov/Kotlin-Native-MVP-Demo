@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_wiki"
+            android:icon="@drawable/ic_tabbar_wiki"
+            android:title="WikiApi" />
+
+        <item
+            android:id="@+id/navigation_firebase"
+            android:icon="@drawable/ic_tabbar_firebase"
+            android:title="Firebase" />
+
+        <item
+            android:id="@+id/navigation_nfc"
+            android:icon="@drawable/ic_tabbar_nfc"
+            android:title="NFC" />
+
+    </group>
+</menu>

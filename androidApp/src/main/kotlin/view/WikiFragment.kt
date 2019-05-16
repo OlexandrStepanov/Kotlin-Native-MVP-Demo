@@ -1,33 +1,32 @@
 package com.akqa.kn.app
 
 import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.WindowManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
+import com.akqa.kn.lib.PermissionManager
+import com.akqa.kn.lib.SearchPresenter
+import com.akqa.kn.lib.SearchView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import com.akqa.kn.app.DemoApplication
-import com.akqa.kn.app.R
-import com.akqa.kn.lib.*
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.properties.Delegates
-import android.nfc.*
-import android.widget.Toast
 
 
-class MainActivity : AppCompatActivity(), SearchView {
+class WikiFragment : Fragment(), SearchView {
 
     private val resultsList: MutableList<String> = mutableListOf()
     private lateinit var listViewAdapter: ArrayAdapter<String>
@@ -40,20 +39,21 @@ class MainActivity : AppCompatActivity(), SearchView {
 
     override val query get() = editText.text.toString()
 
-    private val application by lazy { super.getApplication() as DemoApplication }
+    private val application by lazy { activity?.application as DemoApplication }
     private val repository get() = application.wikiRepository
     private val presenter by lazy { SearchPresenter(repository, application.locationService, this) }
     private lateinit var editText: EditText
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-        setContentView(R.layout.activity_main)
 
-        listViewAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, resultsList)
-        findViewById<ListView>(R.id.listView).adapter = listViewAdapter
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_wiki, container, false)
 
-        editText = findViewById<EditText>(R.id.editText)
+        listViewAdapter = ArrayAdapter(activity?.baseContext, android.R.layout.simple_list_item_1, resultsList)
+        view.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
+
+        editText = view.findViewById<EditText>(R.id.editText)
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 presenter.present()
@@ -69,14 +69,11 @@ class MainActivity : AppCompatActivity(), SearchView {
             application.locationService.requestPermissions(permissionManager)
             presenter.start()
         }
+
+        return view
     }
 
-    override fun onDestroy() {
-        presenter.stop()
-        super.onDestroy()
-    }
-
-    private val permissionManager = PermissionManagerImpl(this)
+    private val permissionManager by lazy { PermissionManagerImpl(activity!!) }
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
@@ -84,28 +81,12 @@ class MainActivity : AppCompatActivity(), SearchView {
         permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        if (intent != null) {
-            readFromIntent(intent)
-        }
+    override fun onDestroy() {
+        presenter.stop()
+        super.onDestroy()
     }
 
-    private fun readFromIntent(intent: Intent) {
-        val action = intent.action
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED == action) {
-            val parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
-            val context = this
-            with(parcelables) {
-                val inNdefMessage = this[0] as NdefMessage
-                val inNdefRecords = inNdefMessage.records
-                val ndefRecord_0 = inNdefRecords[0]
-
-                val inMessage = String(ndefRecord_0.payload)
-                Toast.makeText(context, inMessage, Toast.LENGTH_LONG).show()
-             }
-        }
-    }
-}
+}// Required empty public constructor
 
 private class PermissionManagerImpl(private val activity: Activity) : PermissionManager {
 
@@ -122,9 +103,9 @@ private class PermissionManagerImpl(private val activity: Activity) : Permission
             codeToContinuation[code] = it
 
             ActivityCompat.requestPermissions(
-                activity,
-                arrayOf(permission),
-                code
+                    activity,
+                    arrayOf(permission),
+                    code
             )
         }
     }
