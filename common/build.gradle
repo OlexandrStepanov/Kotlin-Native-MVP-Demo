@@ -82,6 +82,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-android:${rootProject.ext.ktor_version}"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${rootProject.ext.serialization_version}"
                 implementation 'com.google.firebase:firebase-firestore:17.1.0'
+                implementation "androidx.lifecycle:lifecycle-livedata:2.0.0"
             }
         }
         androidLibTest {

@@ -8,14 +8,14 @@
 import UIKit
 import common
 
-class PostsViewController: UIViewController, PostsView, UITableViewDelegate, UITableViewDataSource {
+class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
 
     lazy var firebaseService = IosFirebaseService()
-    lazy var presenter = PostsPresenter(firebase: firebaseService, view: self)
+    lazy var viewModel = PostsViewModel(firebase: firebaseService)
     
-    var results: [Post] = [] {
+    var posts: [Post] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -29,12 +29,19 @@ class PostsViewController: UIViewController, PostsView, UITableViewDelegate, UIT
         
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 50.0;
+        
+        viewModel.state().observeForever() { [weak self] (value) -> KotlinUnit in
+            if let state = value as? PostsViewState {
+                self?.posts = state.results
+            }
+            return KotlinUnit()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        presenter.present()
+        viewModel.reload()
     }
     
     //  MARK: - Table view stuff
@@ -43,13 +50,13 @@ class PostsViewController: UIViewController, PostsView, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
         
-        let post = results[indexPath.row]
+        let post = posts[indexPath.row]
         cell.textLabel?.text = post.title
         cell.detailTextLabel?.text = post.text
         
