@@ -11,10 +11,5 @@
             android:icon="@drawable/ic_tabbar_firebase"
             android:title="Firebase" />
 
-        <item
-            android:id="@+id/navigation_nfc"
-            android:icon="@drawable/ic_tabbar_nfc"
-            android:title="NFC" />
-
     </group>
 </menu>

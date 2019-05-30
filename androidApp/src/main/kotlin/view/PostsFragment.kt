@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import com.akqa.kn.lib.Post
-import com.akqa.kn.lib.PostsPresenter
-import com.akqa.kn.lib.PostsView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
+import androidx.lifecycle.*
+
+import com.akqa.kn.lib.*
 
 class PostsListViewAdapter(context: Context, private val layoutResource: Int, posts: List<Post>) : ArrayAdapter<Post>(context, layoutResource, posts) {
 
@@ -40,17 +40,25 @@ class PostsListViewAdapter(context: Context, private val layoutResource: Int, po
 }
 
 
-class PostsFragment : Fragment(), PostsView {
+class PostsFragment : Fragment() {
 
     private lateinit var listViewAdapter: PostsListViewAdapter
 
-    override var results: List<Post> by Delegates.observable(emptyList()) { _, _, newValue ->
+    var posts: List<Post> by Delegates.observable(emptyList()) { _, _, newValue ->
         listViewAdapter = PostsListViewAdapter(activity!!.baseContext, R.layout.post_cell, newValue)
         this.view!!.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
     }
 
     private val application by lazy { activity?.application as DemoApplication }
-    private val presenter by lazy { PostsPresenter(application.firebaseService, this) }
+    private val viewModel by lazy { PostsViewModel(application.firebaseService) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.state().toLivedata.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            posts = it.results
+        })
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -76,7 +84,7 @@ class PostsFragment : Fragment(), PostsView {
 
     private fun reloadList() {
         GlobalScope.launch(Dispatchers.Main) {
-            presenter.present()
+            viewModel.reload()
         }
     }
 

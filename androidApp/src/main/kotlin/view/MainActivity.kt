@@ -52,27 +52,5 @@ class MainActivity : AppCompatActivity() {
             transaction.commit()
         }
     }
-
-//    override fun onNewIntent(intent: Intent?) {
-//        if (intent != null) {
-//            readFromIntent(intent)
-//        }
-//    }
-//
-//    private fun readFromIntent(intent: Intent) {
-//        val action = intent.action
-//        if (NfcAdapter.ACTION_NDEF_DISCOVERED == action) {
-//            val parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
-//            val context = this
-//            with(parcelables) {
-//                val inNdefMessage = this[0] as NdefMessage
-//                val inNdefRecords = inNdefMessage.records
-//                val ndefRecord_0 = inNdefRecords[0]
-//
-//                val inMessage = String(ndefRecord_0.payload)
-//                Toast.makeText(context, inMessage, Toast.LENGTH_LONG).show()
-//             }
-//        }
-//    }
 }
 
