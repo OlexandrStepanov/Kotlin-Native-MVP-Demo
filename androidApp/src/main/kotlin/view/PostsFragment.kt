@@ -2,7 +2,7 @@ package com.akqa.kn.app
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,20 +52,20 @@ class PostsFragment : Fragment() {
     private val application by lazy { activity?.application as DemoApplication }
     private val viewModel by lazy { PostsViewModel(application.firebaseService) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel.state().toLivedata.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            posts = it.results
-        })
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_posts, container, false)
 
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.state().toLivedata.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            posts = it.results
+        })
     }
 
     override fun onResume() {
