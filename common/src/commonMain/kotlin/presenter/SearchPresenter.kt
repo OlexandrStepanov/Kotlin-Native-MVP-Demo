@@ -42,22 +42,21 @@ class SearchPresenter(
         locationService.location?.let { location ->
             GlobalScope.launch(coroutineDispatcher) {
 
-                view.results = repository.getNearestPages(location).map {
+                view.results = repository.getNearestPages(location).filter {
+                    if (view.query.isNotEmpty()) it.title.contains(view.query) else true
+                }.sortedBy {
+                    it.dist
+                }.take(10).map {
                     SearchView.ResultItem(
                         it.title,
                         it.dist,
                         "https://en.wikipedia.org/wiki/${it.title}"
                     )
-                }.filter {
-                    it.matches(view.query)
                 }
             }
         }
     }
 
 }
-
-private fun SearchView.ResultItem.matches(query: String): Boolean =
-    this.title.contains(query)
 
 expect val coroutineDispatcher: CoroutineDispatcher

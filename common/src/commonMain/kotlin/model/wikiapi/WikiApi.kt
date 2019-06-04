@@ -37,7 +37,7 @@ class WikiApi {
                 "&list=geosearch" +
                 "&gscoord=${location.latitude}%7C${location.longitude}" +
                 "&gsradius=10000" +
-                "&gslimit=10" +
+                "&gslimit=100" +
                 "&format=json"
 
         return client.get<WikiResponse>(url).query.geosearch
