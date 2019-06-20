@@ -64,6 +64,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-core:${rootProject.ext.ktor_version}"
                 implementation "io.ktor:ktor-client-json:${rootProject.ext.ktor_version}"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${rootProject.ext.serialization_version}"
+                implementation "com.badoo.reaktive:reaktive:${rootProject.ext.reaktive_version}"
             }
         }
         commonTest {
@@ -83,6 +84,7 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${rootProject.ext.serialization_version}"
                 implementation 'com.google.firebase:firebase-firestore:17.1.0'
                 implementation "androidx.lifecycle:lifecycle-livedata:2.0.0"
+                implementation "com.badoo.reaktive:reaktive-android:${rootProject.ext.reaktive_version}"
             }
         }
         androidLibTest {
@@ -98,6 +100,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-core-native:${rootProject.ext.ktor_version}"
                 implementation "io.ktor:ktor-client-json-native:${rootProject.ext.ktor_version}"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:${rootProject.ext.serialization_version}"
+                implementation "com.badoo.reaktive:reaktive-iossim:${rootProject.ext.reaktive_version}"
             }
         }
     }
