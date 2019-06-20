@@ -22,7 +22,7 @@ class SearchPresenter(
 ) {
 
     private fun onLocationUpdate() {
-        present()
+        reload()
     }
 
     private val onLocationUpdateCallback = ::onLocationUpdate
@@ -30,7 +30,7 @@ class SearchPresenter(
     fun start() {
         locationService.onLocationUpdateListeners += onLocationUpdateCallback
         locationService.start()
-        present()
+        reload()
     }
 
     fun stop() {
@@ -38,7 +38,7 @@ class SearchPresenter(
         locationService.onLocationUpdateListeners -= onLocationUpdateCallback
     }
 
-    fun present() {
+    fun reload() {
         locationService.location?.let { location ->
             GlobalScope.launch(coroutineDispatcher) {
 

@@ -98,7 +98,6 @@ kotlin {
                 implementation "io.ktor:ktor-client-core-native:${rootProject.ext.ktor_version}"
                 implementation "io.ktor:ktor-client-json-native:${rootProject.ext.ktor_version}"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:${rootProject.ext.serialization_version}"
-
             }
         }
     }

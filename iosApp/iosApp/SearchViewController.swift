@@ -39,7 +39,7 @@ class SearchViewController : UIViewController, SearchView, UITableViewDelegate, 
     }
 
     @IBAction func searchQueryUpdated(_ sender: UITextField) {
-        presenter.present()
+        presenter.reload()
     }
     
     
