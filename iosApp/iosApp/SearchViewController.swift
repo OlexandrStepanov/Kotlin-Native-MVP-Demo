@@ -7,26 +7,44 @@ class SearchResultCell : UITableViewCell {
 }
 
 
-class SearchViewController : UIViewController, SearchView, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var searchResultsTable: UITableView!
     @IBOutlet var searchQueryTextField: UITextField!
     
-    lazy var theWikiRepository = WikiRepositoryImpl()
-    lazy var presenter = SearchPresenter(
-            repository: theWikiRepository,
-            locationService: LocationServiceImpl(),
-            view: self
+    lazy var locationService = LocationServiceImpl()
+    lazy var api = WikiRepositoryImpl()
+    lazy var viewModel = SearchViewModelImpl(
+            repository: api,
+            locationService: locationService
     )
+    
+//    let disposable = ReaktiveCompositeDisposable()
+    
+    deinit {
+//        disposable.dispose()
+        viewModel.stop()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         searchResultsTable.delegate = self
         searchResultsTable.dataSource = self
-        presenter.start()
+        
+        setupObservers()
+        viewModel.start()
     }
     
-    var results: [SearchViewResultItem] = [] {
+    func setupObservers() {
+//        disposable.add(disposable:
+//            ReaktiveExtensionsKt.subscribe(viewModel.results) { [weak self] (list: [SearchViewModelResultItem]) -> KotlinUnit in
+//            self?.results = list
+//            return KotlinUnit()
+//        }
+    }
+    
+    var results: [SearchViewModelResultItem] = [] {
         didSet {
             self.searchResultsTable.reloadData()
         }
@@ -39,7 +57,7 @@ class SearchViewController : UIViewController, SearchView, UITableViewDelegate, 
     }
 
     @IBAction func searchQueryUpdated(_ sender: UITextField) {
-        presenter.reload()
+        viewModel.query.onNext(value: sender.text)
     }
     
     
