@@ -20,7 +20,7 @@ class IosFirebaseDocument: FirebaseDocument {
 class IosFirebaseService: FirebaseService {
     let db = Firestore.firestore()
     
-    func loadAllDocuments(collectionRef: String, handler: @escaping ([FirebaseDocument]) -> KotlinUnit) {
+    func loadAllDocuments(collectionRef: String, handler: @escaping ([FirebaseDocument]) -> Void) {
         db.collection("posts").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -33,7 +33,7 @@ class IosFirebaseService: FirebaseService {
                     return nil
                 }
                 
-                let _=handler(documents)
+                handler(documents)
             }
         }
     }

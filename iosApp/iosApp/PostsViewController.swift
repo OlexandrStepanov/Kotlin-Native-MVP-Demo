@@ -30,11 +30,10 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 50.0;
         
-        viewModel.state().observeForever() { [weak self] (value) -> KotlinUnit in
+        viewModel.state().observeForever() { [weak self] (value) -> Void in
             if let state = value as? PostsViewState {
                 self?.posts = state.results
             }
-            return KotlinUnit()
         }
     }
     
