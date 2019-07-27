@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 expect open class KLiveData<T>() {
     fun observeForever(block: (T) -> Unit)

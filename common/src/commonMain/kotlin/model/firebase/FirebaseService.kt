@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 interface FirebaseDocument {
     val json: String

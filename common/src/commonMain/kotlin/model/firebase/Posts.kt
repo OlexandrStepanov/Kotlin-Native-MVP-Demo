@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json

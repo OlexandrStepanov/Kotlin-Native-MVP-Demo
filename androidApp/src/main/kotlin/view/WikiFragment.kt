@@ -1,4 +1,4 @@
-package com.akqa.kn.app
+package com.sto.kn.app
 
 import android.app.Activity
 import android.content.pm.PackageManager
@@ -14,9 +14,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
-import com.akqa.kn.lib.PermissionManager
-import com.akqa.kn.lib.SearchPresenter
-import com.akqa.kn.lib.SearchView
+import com.sto.kn.lib.PermissionManager
+import com.sto.kn.lib.SearchPresenter
+import com.sto.kn.lib.SearchView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

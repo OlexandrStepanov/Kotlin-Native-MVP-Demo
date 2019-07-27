@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

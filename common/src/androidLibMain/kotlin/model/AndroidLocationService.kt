@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 import android.Manifest
 import android.app.Application
@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import com.akqa.kn.lib.PermissionManager
+import com.sto.kn.lib.PermissionManager
 
 class LocationServiceImpl(private val application: Application): AbstractLocationService() {
 

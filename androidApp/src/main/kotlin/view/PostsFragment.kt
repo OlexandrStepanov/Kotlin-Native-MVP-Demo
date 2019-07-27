@@ -1,4 +1,4 @@
-package com.akqa.kn.app
+package com.sto.kn.app
 
 import android.content.Context
 import android.os.Bundle
@@ -14,7 +14,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
-import com.akqa.kn.lib.*
+import com.sto.kn.lib.*
 
 class PostsListViewAdapter(context: Context, private val layoutResource: Int, posts: List<Post>) : ArrayAdapter<Post>(context, layoutResource, posts) {
 

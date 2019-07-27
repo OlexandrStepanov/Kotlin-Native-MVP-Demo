@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.json.Json

@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 private fun Location.toAndroidLocation() = android.location.Location("").also {
     it.latitude = latitude

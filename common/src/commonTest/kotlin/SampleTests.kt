@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 import kotlin.test.Test
 import kotlin.test.assertFalse

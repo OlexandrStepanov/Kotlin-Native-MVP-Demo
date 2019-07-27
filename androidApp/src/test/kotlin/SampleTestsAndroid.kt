@@ -1,4 +1,4 @@
-package com.akqa.kn.app
+package com.sto.kn.app
 
 import org.junit.Test
 import kotlin.test.assertTrue

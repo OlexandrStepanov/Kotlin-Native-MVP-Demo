@@ -1,4 +1,4 @@
-package com.akqa.kn.app
+package com.sto.kn.app
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView

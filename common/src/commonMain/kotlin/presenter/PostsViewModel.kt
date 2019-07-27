@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 data class PostsViewState(val results: List<Post>)
 

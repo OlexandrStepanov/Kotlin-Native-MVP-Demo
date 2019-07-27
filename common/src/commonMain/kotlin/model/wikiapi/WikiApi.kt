@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature

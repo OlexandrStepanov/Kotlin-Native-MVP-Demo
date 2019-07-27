@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.akqa.kn.app">
+          package="com.sto.kn.app">
           
           <uses-permission-sdk-23 android:name="android.permission.READ_CONTACTS" />
           <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -13,7 +13,7 @@
               android:supportsRtl="true"
               android:theme="@style/AppTheme"
               android:icon="@mipmap/ic_launcher">
-              <activity android:name="com.akqa.kn.app.MainActivity">
+              <activity android:name="com.sto.kn.app.MainActivity">
                   <intent-filter>
                       <action android:name="android.intent.action.MAIN" />
                       <category android:name="android.intent.category.LAUNCHER" />

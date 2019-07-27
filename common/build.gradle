@@ -5,7 +5,7 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
-group = 'com.akqa.kn.lib'
+group = 'com.sto.kn.lib'
 version = 1.0
 
 android {

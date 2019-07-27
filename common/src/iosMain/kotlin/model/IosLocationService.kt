@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 import kotlinx.cinterop.useContents
 import platform.Contacts.*

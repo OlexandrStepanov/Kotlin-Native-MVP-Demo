@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 interface LocationService {
     val onLocationUpdateListeners: MutableList<() -> Unit>

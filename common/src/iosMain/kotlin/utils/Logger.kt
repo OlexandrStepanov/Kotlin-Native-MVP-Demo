@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 actual class PlatformLogger {
     actual var enabled = true

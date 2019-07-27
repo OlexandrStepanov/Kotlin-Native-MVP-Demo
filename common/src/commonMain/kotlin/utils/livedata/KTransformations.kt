@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 fun <X, Y> KLiveData<X>.map(mapFunction: (X) -> Y): KLiveData<Y> {
     return Transformations.map(this, mapFunction)

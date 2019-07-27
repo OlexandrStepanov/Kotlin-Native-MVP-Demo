@@ -1,4 +1,4 @@
-package com.akqa.kn.lib
+package com.sto.kn.lib
 
 expect class PlatformLogger() {
     var enabled: Boolean
