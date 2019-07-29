@@ -57,4 +57,10 @@ protected constructor(initialState: S, reducer: Reducer<S>) : Store<S>(initialSt
 
         override fun create(initialState: S, reducer: Reducer<S>) = BaseStore(initialState, reducer)
     }
+
+    companion object {
+
+        fun <S> create(initialState: S,  reducer: Reducer<S>, vararg enhancers: Enhancer<S>): Store<S> =
+                createStore(Creator(), initialState, reducer, *enhancers)
+    }
 }

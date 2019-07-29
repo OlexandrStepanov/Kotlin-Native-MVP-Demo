@@ -30,3 +30,8 @@ object Logger {
     }
 }
 
+val Any.TAG: String
+    get() {
+        val tag = this::class.simpleName
+        return tag ?: "unknown"
+    }

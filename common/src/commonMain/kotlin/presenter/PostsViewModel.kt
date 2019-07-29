@@ -1,34 +1,31 @@
 package com.sto.kn.lib
 
-data class PostsViewState(val results: List<Post>)
+import com.sto.kn.lib.redux.*
+import com.sto.kn.lib.redux.PartialSubscriber.SubStateChangeListener
 
-class PostsViewModel (
-        private val firebase: FirebaseService
-) {
+class PostsViewModel(private val view: View) : BaseViewModel(), SubStateChangeListener<DemoState, PostsState> {
 
-    private val TAG = "PostsPresenter"
-
-    private val state = KMutableLiveData<PostsViewState>()
-
-    fun state() : KLiveData<PostsViewState> {
-        return state
+    interface View {
+        fun set(showLoadingIndicator: Boolean)
+        fun set(posts: List<Post>)
     }
 
-    fun reload() {
-        firebase.loadAllDocuments("posts") { documents ->
-            val posts = documents.mapNotNull { doc ->
-                Logger.d(TAG, "Trying to parse Post: ${doc.json}")
-                var post: Post? = null
-                try {
-                    post = Post.parse(doc.json)
-                } catch (e: Throwable) {
-                    Logger.e(TAG, "Can't parse Post from data above. ", e)
-                }
-                post
-            }
+    // BaseViewModel
 
-            state.value = PostsViewState(posts)
-        }
+    override fun onCreateSubscriber(): Subscriber<DemoState> = PartialSubscriber(this)
+
+    // SubStateChangeListener
+
+    override fun getSubState(state: DemoState): PostsState = state.postsState
+
+    override fun onSubStateChanged(subState: PostsState) {
+        view.set(subState.isLoading)
+        view.set(subState.results)
     }
 
+    // Public Api
+
+    fun reloadPosts() {
+        mStore.dispatch(PostsActions.LoadPosts())
+    }
 }
