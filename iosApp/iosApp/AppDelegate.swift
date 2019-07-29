@@ -1,9 +1,14 @@
 import UIKit
 import Firebase
+import common
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
     var window: UIWindow?
+    
+    lazy var firebaseService = IosFirebaseService()
+    lazy var storeCoordinator = StoreCoordinator(firebase: firebaseService, initialState: DemoState.Companion().defaultState())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()

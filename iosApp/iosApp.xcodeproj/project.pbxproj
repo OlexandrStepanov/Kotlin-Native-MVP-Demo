@@ -11,6 +11,7 @@
 		2AE26B99C0B1FB8F09ACDF68 /* Pods_iosAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A551AA73994B3AA649CD7A /* Pods_iosAppTests.framework */; };
 		2C30424D2196CFE5002B4B53 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30424C2196CFE5002B4B53 /* SearchViewController.swift */; };
 		4679B3C7228175FF006C87D7 /* common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F861D805207FA4200085E80D /* common.framework */; };
+		A9350CED22EF7AC600922139 /* AppNavigationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9350CEC22EF7AC600922139 /* AppNavigationProtocol.swift */; };
 		A95A95D8228027F500835003 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95A95D7228027F500835003 /* PostsViewController.swift */; };
 		A95A95DA228029FA00835003 /* IosFirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95A95D9228029FA00835003 /* IosFirebaseService.swift */; };
 		A95A95DC22804EA500835003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A95A95DB22804EA500835003 /* Assets.xcassets */; };
@@ -58,9 +59,9 @@
 		2C30424C2196CFE5002B4B53 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		30E665C00E6BF837E9EA34D1 /* Pods-iosAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iosAppTests/Pods-iosAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		39A26C31DC4FFF6D376BE1DA /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
-		4679B3CA2281A4FE006C87D7 /* iosApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = iosApp.entitlements; sourceTree = "<group>"; };
 		578665292602018FBFFDB224 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		678F44176D2A3D747B421F1C /* Pods-iosAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosAppTests.release.xcconfig"; path = "Target Support Files/Pods-iosAppTests/Pods-iosAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		A9350CEC22EF7AC600922139 /* AppNavigationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationProtocol.swift; sourceTree = "<group>"; };
 		A95A95D7228027F500835003 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		A95A95D9228029FA00835003 /* IosFirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosFirebaseService.swift; sourceTree = "<group>"; };
 		A95A95DB22804EA500835003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,6 +125,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A9350CEB22EF7A9A00922139 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A9350CEC22EF7AC600922139 /* AppNavigationProtocol.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		B55D52DDEA726B5ED5C1A7AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,7 +166,7 @@
 		F861D7DF207FA40F0085E80D /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				4679B3CA2281A4FE006C87D7 /* iosApp.entitlements */,
+				A9350CEB22EF7A9A00922139 /* Utilities */,
 				A95A95D9228029FA00835003 /* IosFirebaseService.swift */,
 				2C30424C2196CFE5002B4B53 /* SearchViewController.swift */,
 				A95A95D7228027F500835003 /* PostsViewController.swift */,
@@ -395,6 +404,7 @@
 			files = (
 				A95A95DA228029FA00835003 /* IosFirebaseService.swift in Sources */,
 				A95A95D8228027F500835003 /* PostsViewController.swift in Sources */,
+				A9350CED22EF7AC600922139 /* AppNavigationProtocol.swift in Sources */,
 				2C30424D2196CFE5002B4B53 /* SearchViewController.swift in Sources */,
 				F861D7E1207FA40F0085E80D /* AppDelegate.swift in Sources */,
 			);
@@ -566,7 +576,6 @@
 			baseConfigurationReference = FAB1527B29BFA7E9104235A2 /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UV5ZQA8FKQ;
 				ENABLE_BITCODE = NO;
@@ -588,7 +597,6 @@
 			baseConfigurationReference = 578665292602018FBFFDB224 /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UV5ZQA8FKQ;
 				ENABLE_BITCODE = NO;

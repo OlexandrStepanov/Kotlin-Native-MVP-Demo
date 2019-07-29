@@ -8,12 +8,12 @@
 import UIKit
 import common
 
-class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AppNavigationProtocol {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
 
-    lazy var firebaseService = IosFirebaseService()
-    lazy var viewModel = PostsViewModel(firebase: firebaseService)
+    lazy var viewModel = PostsViewModel.init(view: self)
     
     var posts: [Post] = [] {
         didSet {
@@ -21,26 +21,26 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    deinit {
+        viewModel.onDestroy()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.onCreate(store: storeCoordinator.store)
             
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 50.0;
-        
-        viewModel.state().observeForever() { [weak self] (value) -> Void in
-            if let state = value as? PostsViewState {
-                self?.posts = state.results
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.reload()
+        viewModel.reloadPosts()
     }
     
     //  MARK: - Table view stuff
@@ -60,5 +60,21 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.detailTextLabel?.text = post.text
         
         return cell
+    }
+}
+
+extension PostsViewController: PostsViewModelView {
+    
+    func set(showLoadingIndicator: Bool) {
+        if showLoadingIndicator {
+            self.loadingIndicator.startAnimating()
+        }
+        else {
+            self.loadingIndicator.stopAnimating()
+        }
+    }
+    
+    func set(posts: [Post]) {
+        self.posts = posts
     }
 }

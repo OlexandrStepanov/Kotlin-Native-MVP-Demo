@@ -14,3 +14,5 @@ data class PostsState (
 data class DemoState (
     val postsState: PostsState = PostsState()
 )
+
+fun DemoState.Companion.defaultState() = DemoState()

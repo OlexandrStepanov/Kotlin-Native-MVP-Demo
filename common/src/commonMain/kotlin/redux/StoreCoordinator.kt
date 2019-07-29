@@ -6,7 +6,7 @@ class StoreCoordinator(
         val firebase: FirebaseService,
         val initialState: DemoState
 ) {
-    val mStore: Store<DemoState> =
+    val store: Store<DemoState> =
             BaseStore.create(initialState, DemoStateReducer(), Middleware.applyMiddlewares(LoadPostsSideEffect(firebase)))
 }
 
