@@ -9,10 +9,10 @@ internal class PostsReducer : Reducer<PostsState> {
     override fun reduce(state: PostsState, action: Action): PostsState =
         when (action) {
             is PostsActions.LoadPosts-> {
-                PostsState(isLoading = true, results =  state.results)
+                PostsState.Loading
             }
             is PostsActions.PostsLoaded-> {
-                PostsState(isLoading = false, results =  action.posts)
+                PostsState.Loaded(posts = action.posts)
             }
             else -> state
         }

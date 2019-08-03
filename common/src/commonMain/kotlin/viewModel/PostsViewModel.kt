@@ -18,10 +18,19 @@ class PostsViewModel(private val view: View) : BaseViewModel(), SubStateChangeLi
 
     override fun getSubState(state: DemoState): PostsState = state.postsState
 
-    override fun onSubStateChanged(subState: PostsState) {
-        view.set(subState.isLoading)
-        view.set(subState.results)
-    }
+    override fun onSubStateChanged(subState: PostsState) =
+        when (subState) {
+            is PostsState.NotLoaded -> {
+                view.set(false)
+            }
+            is PostsState.Loading -> {
+                view.set(true)
+            }
+            is PostsState.Loaded -> {
+                view.set(false)
+                view.set(subState.posts)
+            }
+        }
 
     // Public Api
 
