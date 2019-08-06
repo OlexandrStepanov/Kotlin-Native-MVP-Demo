@@ -35,6 +35,6 @@ class PostsViewModel(private val view: View) : BaseViewModel(), SubStateChangeLi
     // Public Api
 
     fun reloadPosts() {
-        mStore.dispatch(PostsActions.LoadPosts())
+        mStore.dispatch(PostsActions.LoadPosts)
     }
 }

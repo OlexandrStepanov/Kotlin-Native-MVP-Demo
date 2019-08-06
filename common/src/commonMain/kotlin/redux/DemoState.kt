@@ -5,7 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DemoState (
-    val postsState: PostsState = PostsState.NotLoaded
+    val postsState: PostsState = PostsState.NotLoaded,
+    val wikiSearchState: WikiSearchState = WikiSearchState()
 )
 
 val DemoState.Companion.defaultState: DemoState

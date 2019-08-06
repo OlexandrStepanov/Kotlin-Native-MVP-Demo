@@ -4,9 +4,16 @@ import com.sto.kn.lib.redux.*
 
 class StoreCoordinator(
         val firebase: FirebaseService,
+        val locationService: AbstractLocationService,
         val initialState: DemoState
 ) {
     val store: Store<DemoState> =
-            BaseStore.create(initialState, DemoStateReducer(), Middleware.applyMiddlewares(LoadPostsSideEffect(firebase)))
+            BaseStore.create(initialState, DemoStateReducer(),
+                    Middleware.applyMiddlewares(
+                            LoadPostsSideEffect(firebase),
+                            LocationSideEffect(locationService),
+                            WikiSearchSideEffect(WikiRepositoryImpl())
+                            )
+            )
 }
 
