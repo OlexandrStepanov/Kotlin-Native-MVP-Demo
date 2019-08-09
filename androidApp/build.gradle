@@ -54,6 +54,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.ext.coroutines_version}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.ext.coroutines_version}"
     implementation "com.google.firebase:firebase-core:${rootProject.ext.firebase_version}"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
 
     testImplementation "org.jetbrains.kotlin:kotlin-test"
     testImplementation 'junit:junit:4.12'

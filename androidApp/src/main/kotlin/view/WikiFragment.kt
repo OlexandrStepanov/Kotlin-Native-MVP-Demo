@@ -15,8 +15,8 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
 import com.sto.kn.lib.PermissionManager
-import com.sto.kn.lib.SearchPresenter
-import com.sto.kn.lib.SearchView
+import com.sto.kn.lib.WikiSearchState
+import com.sto.kn.lib.WikiSearchViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,24 +26,20 @@ import kotlin.coroutines.suspendCoroutine
 import kotlin.properties.Delegates
 
 
-class WikiFragment : Fragment(), SearchView {
+class WikiFragment : Fragment(), WikiSearchViewModel.View {
 
     private val resultsList: MutableList<String> = mutableListOf()
     private lateinit var listViewAdapter: ArrayAdapter<String>
 
-    override var results: List<SearchView.ResultItem> by Delegates.observable(emptyList()) { property, oldValue, newValue ->
+    var items: List<WikiSearchViewModel.View.Item> by Delegates.observable(emptyList()) { property, oldValue, newValue ->
         resultsList.clear()
         newValue.mapTo(resultsList) { it.title }
         listViewAdapter.notifyDataSetChanged()
     }
 
-    override val query get() = editText.text.toString()
-
     private val application by lazy { activity?.application as DemoApplication }
-    private val repository get() = application.wikiRepository
-    private val presenter by lazy { SearchPresenter(repository, application.locationService, this) }
+    private val viewModel by lazy { WikiSearchViewModel(this) }
     private lateinit var editText: EditText
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -56,7 +52,12 @@ class WikiFragment : Fragment(), SearchView {
         editText = view.findViewById<EditText>(R.id.editText)
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                presenter.reload()
+                if (p0 != null) {
+                    viewModel.update(p0.toString())
+                }
+                else {
+                    viewModel.update("")
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -67,7 +68,8 @@ class WikiFragment : Fragment(), SearchView {
 
         GlobalScope.launch(Dispatchers.Main) {
             application.locationService.requestPermissions(permissionManager)
-            presenter.start()
+            viewModel.onCreate(application.storeCoordinator.store)
+            viewModel.startUpdating()
         }
 
         return view
@@ -82,8 +84,18 @@ class WikiFragment : Fragment(), SearchView {
     }
 
     override fun onDestroy() {
-        presenter.stop()
+        viewModel.stopUpdating()
         super.onDestroy()
+    }
+
+    //  WikiSearchViewModel.View
+
+    override fun set(state: WikiSearchState.State) {
+
+    }
+
+    override fun set(items: List<WikiSearchViewModel.View.Item>) {
+        this.items = items
     }
 
 }// Required empty public constructor

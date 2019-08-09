@@ -8,7 +8,19 @@ internal class WikiSearchReducer : Reducer<WikiSearchState> {
 
     private fun filter(pages: List<WikiPage>, query: String): List<WikiPage> {
         return pages.filter {
-            if (query.isNotEmpty()) it.title.contains(query) else true
+            if (query.isEmpty()) {
+                true
+            } else {
+                var result = false
+                val words = it.title.split(" ")
+                for (word in words) {
+                    if (word.startsWith(query, ignoreCase = true)) {
+                        result = true
+                        break
+                    }
+                }
+                result
+            }
         }.sortedBy {
             it.dist
         }.take(10)
@@ -28,7 +40,7 @@ internal class WikiSearchReducer : Reducer<WikiSearchState> {
                 }
 
                 is WikiSearchActions.SearchQueryUpdated -> {
-                    state.copy(filteredPages = filter(state.pages, action.query))
+                    state.copy(filteredPages = filter(state.pages, action.query), query = action.query)
                 }
 
                 else -> state

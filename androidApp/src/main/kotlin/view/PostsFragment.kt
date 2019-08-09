@@ -39,7 +39,7 @@ class PostsListViewAdapter(context: Context, private val layoutResource: Int, po
 }
 
 
-class PostsFragment : Fragment() {
+class PostsFragment : Fragment(), PostsViewModel.View {
 
     private lateinit var listViewAdapter: PostsListViewAdapter
 
@@ -49,7 +49,7 @@ class PostsFragment : Fragment() {
     }
 
     private val application by lazy { activity?.application as DemoApplication }
-    private val viewModel by lazy { PostsViewModel(application.firebaseService) }
+    private val viewModel by lazy { PostsViewModel(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -62,9 +62,7 @@ class PostsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.state().toLivedata.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            posts = it.results
-        })
+        viewModel.onCreate(application.storeCoordinator.store)
     }
 
     override fun onResume() {
@@ -82,9 +80,18 @@ class PostsFragment : Fragment() {
     }
 
     private fun reloadList() {
-        GlobalScope.launch(Dispatchers.Main) {
-            viewModel.reload()
-        }
+//        GlobalScope.launch(Dispatchers.Main) {
+            viewModel.reloadPosts()
+//        }
     }
 
-}// Required empty public constructor
+    override fun set(showLoadingIndicator: Boolean) {
+
+    }
+
+    override fun set(posts: List<Post>) {
+        this.posts = posts
+    }
+
+}
+

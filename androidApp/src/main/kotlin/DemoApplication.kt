@@ -5,6 +5,13 @@ import com.sto.kn.lib.*
 
 class DemoApplication : Application() {
     val locationService by lazy { LocationServiceImpl(this) }
-    val wikiRepository = WikiRepositoryImpl()
-    val firebaseService = AndroidFirebaseService()
+    private val firebaseService by lazy { AndroidFirebaseService() }
+
+    lateinit var storeCoordinator: StoreCoordinator
+
+    override fun onCreate() {
+        super.onCreate()
+
+        storeCoordinator = StoreCoordinator(firebaseService, locationService, DemoState())
+    }
 }
